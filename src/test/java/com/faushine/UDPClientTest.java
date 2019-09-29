@@ -11,12 +11,11 @@ import java.io.IOException;
  */
 @Ignore
 public class UDPClientTest {
-
-
+  String host = "";
   @Test
   public void oneRRt() throws IOException {
-    UDPClient client = new UDPClient("192.168.0.101", 30002, 30001);
-    client.run();
+    UDPClient client = new UDPClient(host, 30001, 30002);
+    client.runOnce();
     System.out.println(client.rrt);
   }
 

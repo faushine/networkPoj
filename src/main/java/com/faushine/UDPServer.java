@@ -21,21 +21,19 @@ public class UDPServer {
 
   public void run() throws IOException {
     DatagramSocket clientDs = new DatagramSocket(serverPort);
-    byte[] receive = new byte[1];
+    byte[] buff = new byte[1];
     DatagramPacket dpReceive = null;
     while (true) {
-      dpReceive = new DatagramPacket(receive, receive.length);
+      dpReceive = new DatagramPacket(buff, buff.length);
       clientDs.receive(dpReceive);
-      System.out.println("Received data length is " + receive.length+" byte");
+      System.out.println("Received data length is " + buff.length+" byte");
 
       DatagramSocket serverDs = new DatagramSocket();
-      InetAddress client = dpReceive.getAddress();
-      System.out.println("Received from "+client.toString());
+      InetAddress clientHost = dpReceive.getAddress();
+      System.out.println("Send data to "+clientHost.toString());
       byte[] ack = new byte[1];
-      ack[0] = 2;
-      DatagramPacket ackSend = new DatagramPacket(ack, ack.length, client, clientPort);
+      DatagramPacket ackSend = new DatagramPacket(ack, ack.length, clientHost, clientPort);
       serverDs.send(ackSend);
-      receive = new byte[1];
     }
   }
   public static void main(String[] args) throws IOException {

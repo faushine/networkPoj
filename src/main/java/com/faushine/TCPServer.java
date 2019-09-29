@@ -25,6 +25,7 @@ public class TCPServer {
 
   public void run() throws IOException {
     server = new ServerSocket(port);
+    server.setSoTimeout(0);
     System.out.println("Server started");
     System.out.println("Waiting for a client ...");
     while (true) {

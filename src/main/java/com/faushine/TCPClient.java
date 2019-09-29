@@ -28,7 +28,6 @@ public class TCPClient {
     socket = new Socket(ip, port);
     out = new DataOutputStream(socket.getOutputStream());
     ack = new DataInputStream(socket.getInputStream());
-    System.out.println("Connected");
     byte[] buffer = new byte[size];
     for (int i = 0; i < size; i++) {
       out.writeByte(buffer[i]);
@@ -38,6 +37,7 @@ public class TCPClient {
     out.close();
     socket.close();
     rrt = System.currentTimeMillis() - startTime;
+    System.out.println(rrt+" ms");
   }
 
 }
